@@ -12,6 +12,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	fmt.Printf("Starting server on http://%s:%s", os.Getenv("GO_HOST"), os.Getenv("GO_PORT"))
+
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("GO_PORT")), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%s", os.Getenv("GO_HOST"), os.Getenv("GO_PORT")), nil))
 }

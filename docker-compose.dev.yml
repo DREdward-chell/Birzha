@@ -1,0 +1,32 @@
+services:
+  nginx:
+    ports:
+      - "80:80"
+
+  backend-app:
+    env_file:
+      - backend/.env.dev
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend
+
+  frontend-app:
+    build:
+      dockerfile: frontend/Dockerfile.dev
+    env_file:
+      - frontend/.env.dev
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore:
+            - node_modules
+            - .next
+        - action: rebuild
+          path: ./frontend/package.json

@@ -4,21 +4,27 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    env_file:
-      - backend/.env.dev
     environment:
+      - GO_HOST=${BACKEND_HOST}
       - GO_PORT=${BACKEND_PORT}
-    ports:
-      - "${BACKEND_PORT}:${BACKEND_PORT}"
 
   frontend-app:
-    container_name: fontend-next
+    container_name: frontend-next
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    env_file:
-      - frontend/.env.dev
     environment:
-      - NEXT_PORT=${FRONTEND_PORT}
-    ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - HOSTNAME=${FRONTEND_HOST}
+      - PORT=${FRONTEND_PORT}
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+    depends_on:
+      - backend-app
+      - frontend-app

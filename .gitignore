@@ -2,6 +2,8 @@
 /frontend/.next/
 /frontend/node_modules/
 /backend/.env.dev
+/backend/.env.prod
 /.env
 /frontend/next-env.d.ts
 /frontend/.env.dev
+/frontend/.env.prod
