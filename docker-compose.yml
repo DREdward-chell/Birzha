@@ -1,0 +1,24 @@
+services:
+  backend-app:
+    container_name: backend-go
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env.dev
+    environment:
+      - GO_PORT=${BACKEND_PORT}
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+
+  frontend-app:
+    container_name: fontend-next
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    env_file:
+      - frontend/.env.dev
+    environment:
+      - NEXT_PORT=${FRONTEND_PORT}
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"

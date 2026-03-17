@@ -1,0 +1,7 @@
+/.idea/
+/frontend/.next/
+/frontend/node_modules/
+/backend/.env.dev
+/.env
+/frontend/next-env.d.ts
+/frontend/.env.dev
