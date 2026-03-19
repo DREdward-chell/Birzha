@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     environment:
-      - GO_HOST=${BACKEND_HOST}
-      - GO_PORT=${BACKEND_PORT}
+      - HOSTNAME=${HOSTNAME}
+      - BACKEND_PORT=${BACKEND_PORT}
 
   frontend-app:
     container_name: frontend-next
@@ -14,7 +14,6 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
     environment:
-      - HOSTNAME=${FRONTEND_HOST}
       - PORT=${FRONTEND_PORT}
 
   nginx:
